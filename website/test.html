@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>testing</title>
+    </head>
+    <body>
+        <h1>Json data</h1>
+        <p id="info"></p>
+        <script>
+            const url="http://api.openweathermap.org/data/2.5/weather?q=London&APPID=f93508f5516670154f8d3574002efac4"
+            async function getData(){
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data.weather);
+                document.getElementById('info').innerText = data.weather;
+            }
+            getData();
+        </script>
+    </body>
+</html>
