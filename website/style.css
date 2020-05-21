@@ -5,9 +5,9 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: 15% 10% 30% 35%;
+    grid-auto-rows: 20% 10% 30% 30%;
     /* grid-template-columns:  */
-    height:140vh;
+    height:100vh;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
@@ -16,7 +16,7 @@ body{
 }
 
 .holder{
-
+    
 }
 
 .entry{

@@ -18,9 +18,9 @@ function performAction(event){
     .then(function(data){
         console.log(data);
         postData('/addData', 
-                {date: JSON.stringify(newDate), 
-                temp: JSON.stringify(data), 
-                content: JSON.stringify(userInput)} );
+                {date: newDate, 
+                temp: data, 
+                content: userInput} );
         updateUI('/all')
     }) 
 };
@@ -34,9 +34,7 @@ const getData= async(baseURL, zip, apiKey)=>{
     }  
     catch(error) {
     console.log("error", error);
-    }
-
-   
+    }   
 };
 
 const postData = async(url = '', data = {})=>{
@@ -59,9 +57,9 @@ const updateUI = async (url='') => {
     const request = await fetch(url);
     try{
       const allData= await request.json();
-      document.getElementById('date').innerHTML = newDate;
-      document.getElementById('temp').innerHTML = allData[0].temp;
-      document.getElementById('content').innerHTML = allData[0].userInput;
+      document.getElementById('date').innerHTML = 'Today is : '+ newDate;
+      document.getElementById('temp').innerHTML = 'Current temparature is : '+ allData.temp;
+      document.getElementById('content').innerHTML = 'I am feeling : ' + allData.userInput;
   
     }catch(error){
       console.log("error", error);
