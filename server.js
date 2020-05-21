@@ -30,7 +30,7 @@ app.post('/addData', function (req, res){
      newEntry = {
          date: req.body.date,
          temp: req.body.temp,
-         content: req.body.userInput
+         userInput: req.body.userInput
         };
     projectData.unshift(newEntry);    
 })

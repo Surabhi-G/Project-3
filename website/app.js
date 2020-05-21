@@ -15,12 +15,13 @@ function performAction(event){
 
     getData(baseURL, zip, apiKey)
 
-    .then(function(data){
-        console.log(data);
+    .then(function(weatherData){
+        console.log(weatherData.main.temp);
+        const temperature= weatherData.main.temp;
         postData('/addData', 
                 {date: newDate, 
-                temp: data, 
-                content: userInput} );
+                temp: temperature, 
+                userInput: userInput} );
         updateUI('/all')
     }) 
 };
@@ -29,8 +30,8 @@ const getData= async(baseURL, zip, apiKey)=>{
     const res = await fetch(`${baseURL + zip}&APPID=${apiKey}`)
     
     try {
-    const data = await res.json();
-    return JSON.stringify(data);
+    const weatherData = await res.json();
+    return weatherData;
     }  
     catch(error) {
     console.log("error", error);
