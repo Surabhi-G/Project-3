@@ -27,7 +27,7 @@ app.get('/all',function(req, res){
 })
 
 app.post('/addData', function (req, res){
-     newEntry = {
+    newEntry = {
          date: req.body.date,
          temp: req.body.temp,
          userInput: req.body.userInput

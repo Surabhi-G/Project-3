@@ -14,15 +14,14 @@ function performAction(event){
     let userInput = document.getElementById('feelings').value;
 
     getData(baseURL, zip, apiKey)
-
     .then(function(weatherData){
-        console.log(weatherData.main.temp);
-        const temperature= weatherData.main.temp;
+        console.log(weatherData);
+        const temperature = weatherData.main.temp;
         postData('/addData', 
                 {date: newDate, 
                 temp: temperature, 
-                userInput: userInput} );
-        updateUI('/all')
+                userInput: userInput});       
+        updateUI('/all');
     }) 
 };
 
@@ -39,28 +38,30 @@ const getData= async(baseURL, zip, apiKey)=>{
 };
 
 const postData = async(url = '', data = {})=>{
-    const response= await fetch(url,{
+    const res= await fetch(url,{
         method: 'POST',
         credentials: 'same-origin',
-        header:{
+        headers:{
             'content-type':'application/json',
         },
-        body : JSON.stringify(data),
+        body: JSON.stringify(data),
     });
     try{
-        const newData= await response.json();
+        const newData= await res.json();
+        console.log(newData)
         return newData;
     }catch(error){
         console.log("error",error);
     }
 };
 const updateUI = async (url='') => {
-    const request = await fetch(url);
+    const req = await fetch(url);
     try{
-      const allData= await request.json();
-      document.getElementById('date').innerHTML = 'Today is : '+ newDate;
-      document.getElementById('temp').innerHTML = 'Current temparature is : '+ allData.temp;
-      document.getElementById('content').innerHTML = 'I am feeling : ' + allData.userInput;
+      const allData = await req.json();
+      console.log(allData);
+      document.getElementById('date').innerHTML = 'Today is : '+ allData[0].date;
+      document.getElementById('temp').innerHTML = 'Current temparature is : '+ allData[0].temp;
+      document.getElementById('content').innerHTML = 'I am feeling : ' + allData[0].userInput;
   
     }catch(error){
       console.log("error", error);
