@@ -20,7 +20,6 @@ function performAction(event){
     else{
         getData(baseURL, zip, apiKey)
         .then(function(weatherData){
-            console.log(weatherData);
             const temperature = weatherData.main.temp;
             postData('/addData', 
                 {date: newDate, 
@@ -54,7 +53,6 @@ const postData = async(url = '', data = {})=>{
     });
     try{
         const newData= await res.json();
-        console.log(newData)
         return newData;
     }
     catch(error){
@@ -66,7 +64,6 @@ const updateUI = async (url='') => {
     const req = await fetch(url);
     try{
       const allData = await req.json();
-      console.log(allData);
       document.getElementById('date').innerHTML = 'Today is : '+ allData[0].date;
       document.getElementById('temp').innerHTML = 'Current temparature is : '+ allData[0].temp;
       document.getElementById('content').innerHTML = 'I am feeling : ' + allData[0].userInput;
